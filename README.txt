@@ -15,3 +15,11 @@ For example:
     ./star_visualizer --window_size 1000 1000 --star_files ./stars_*.txt
 
 This will display all the stars in the files in the current directory called "stars-<whatever>.txt".  Each star file's stars will be plotted with a different color.
+
+
+To comple (from within the directory containing the CMakeLists.txt file and star_visualizer.cxx file):
+
+star_visualizer$ mkdir build
+star_visualizer$ cd build
+star_visualizer$ cmake ..
+star_visualizer$ make
