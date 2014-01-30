@@ -198,7 +198,7 @@ int main(int argc, char** argv) {
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--star_files") == 0) {
             i++;
-            while (strlen(argv[i]) > 2 && !(argv[i][0] == '-' && argv[i][1] == '-')) {
+            while (i < argc && strlen(argv[i]) > 2 && !(argv[i][0] == '-' && argv[i][1] == '-')) {
                 star_files.push_back(string(argv[i]));
                 i++;
             }
