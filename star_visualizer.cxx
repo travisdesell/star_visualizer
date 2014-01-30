@@ -182,7 +182,7 @@ void display() {
 
 
 void usage(char *executable) {
-    cerr << "Usage for n-body simulation:" << endl;
+    cerr << "Usage for star visualizer:" << endl;
     cerr << "    " << executable << " <argument list>" << endl;
     cerr << "Possible arguments:" << endl;
     cerr << "   --window_size <width> <height>  : width and height of the window <int> <int>" << endl;
@@ -193,7 +193,6 @@ void usage(char *executable) {
 
 int main(int argc, char** argv) {
 
-    int n_clusters = -1;
     vector<string> star_files;
 
     for (int i = 1; i < argc; i++) {
@@ -204,9 +203,6 @@ int main(int argc, char** argv) {
                 i++;
             }
             i--;
-
-        } else if (strcmp(argv[i], "--n_clusters") == 0) {
-            n_clusters = atoi(argv[++i]);
 
         } else if (strcmp(argv[i], "--window_size") == 0) {
             window_width = atoi(argv[++i]);
@@ -229,17 +225,11 @@ int main(int argc, char** argv) {
         usage(argv[0]);
     }
 
-    if (n_clusters < 0) {
-        cerr << "ERROR: number of clusters not specified or < 0." << endl;
-        usage(argv[0]);
-    }
-
     cout << "Arguments succesfully parsed." << endl;
     cout << "    star files:    " << endl;
     for (int i = 0; i < star_files.size(); i++) {
         cout << "        '" << star_files.at(i) << "'" << endl;
     }
-    cout << "    n_clusters:    " << setw(10) << n_clusters << endl;
     cout << "  window_width:    " << setw(10) << window_width << endl;
     cout << "  window_height:   " << setw(10) << window_width << endl;
 
@@ -333,7 +323,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
     glutInitWindowSize(window_width, window_height);
-    glutCreateWindow("NBody Simulation");
+    glutCreateWindow("Star Visualization");
 
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
