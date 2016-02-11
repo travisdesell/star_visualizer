@@ -16,6 +16,7 @@
 #  include <GL/glut.h>
 #endif
 
+#include <cstring>
 #include <string>
 #include <queue>
 #include <fstream>
