@@ -30,12 +30,8 @@ SET (CMAKE_RANLIB  "/usr/bin/llvm-ranlib")
 
 set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} /opt/local/lib)
 
-find_package(Boost REQUIRED COMPONENTS system)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 
-include_directories(${Boost_INCLUDE_DIR} ${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS})
-link_directories(${Boost_LIBRARY_DIRS} ${OPENGL_LIBRARY_DIRS} ${GLUT_LIBRARY_DIRS})
-
 add_executable(star_visualizer star_visualizer)
-target_link_libraries(star_visualizer ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(star_visualizer ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})

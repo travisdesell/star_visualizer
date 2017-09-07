@@ -21,10 +21,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 #include "math.h"
-
-#include <boost/random.hpp>
-#include <boost/generator_iterator.hpp>
 
 using std::cin;
 using std::cerr;
@@ -40,12 +38,6 @@ using std::vector;
 using std::priority_queue;
 using std::setprecision;
 using std::ifstream;
-
-using boost::variate_generator;
-using boost::mt19937;
-using boost::exponential_distribution;
-using boost::gamma_distribution;
-using boost::uniform_real;
 
 int modulo = 1;
 int *n_stars = NULL;
