@@ -16,9 +16,11 @@
 #  include <GL/glut.h>
 #endif
 
+#include <cstring>
 #include <string>
 #include <queue>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
