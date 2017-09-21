@@ -11,26 +11,28 @@
 #  include <OpenGL/glu.h>
 #  include <GLUT/glut.h>
 #else
+#  include <GL/freeglut.h>
 #  include <GL/gl.h>
 #  include <GL/glu.h>
-#  include <GL/glut.h>
 #endif
 
 #include <cstring>
-#include <string>
 #include <queue>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+
+#include <vector>
+using std::vector;
+
 #include "math.h"
 
 using std::cin;
 using std::cerr;
 using std::cout;
 using std::endl;
-using std::string;
 using std::ostream;
 using std::setw;
 using std::right;
@@ -152,9 +154,8 @@ void display() {
             count++;
         }
 
-        /**
-         *  Note this only works for up to 27 different input files.
-         */
+        //Note this only works for up to 27 different input files.
+
         red -= 0.30;
         if (red < 0) {
             red = 1;
@@ -174,7 +175,6 @@ void display() {
     glutPostRedisplay();
 }
 
-
 void usage(char *executable) {
     cerr << "Usage for star visualizer:" << endl;
     cerr << "    " << executable << " <argument list>" << endl;
@@ -186,14 +186,19 @@ void usage(char *executable) {
 }
 
 int main(int argc, char** argv) {
+    cerr << "it ran!" << endl;
 
-    vector<string> star_files;
+    if (argc <= 1) {
+        usage(argv[0]);
+    }
+
+    std::vector<char*> star_files;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--star_files") == 0) {
             i++;
             while (i < argc && strlen(argv[i]) > 2 && !(argv[i][0] == '-' && argv[i][1] == '-')) {
-                star_files.push_back(string(argv[i]));
+                star_files.push_back(argv[i]);
                 i++;
             }
             i--;
@@ -233,12 +238,12 @@ int main(int argc, char** argv) {
     n_stars = new int[n_files];
 
     for (int j = 0; j < n_files; j++) {
-        ifstream star_stream(star_files.at(j).c_str());
+        ifstream star_stream(star_files.at(j));
 
         star_stream >> n_stars[j];
 
         if (n_stars[j] <= 0) {
-            cerr << "Incorrectly formatted star file: '" << star_files.at(j).c_str() << "'" << endl;
+            cerr << "Incorrectly formatted star file: '" << star_files.at(j) << "'" << endl;
             cerr << "First line should contain the number of stars in the file, and be > 0." << endl;
             exit(1);
         }
@@ -293,7 +298,7 @@ int main(int argc, char** argv) {
 
 
         cout << endl;
-        cout << "file: '" << star_files.at(j).c_str() << "'" << endl;
+        cout << "file: '" << star_files.at(j) << "'" << endl;
         cout << "   n_stars: " << setw(10) << n_stars[j] << endl;
         cout << "   avg l:   " << setw(10) << avg_l << endl;
         cout << "   avg b:   " << setw(10) << avg_b << endl;
@@ -328,7 +333,7 @@ int main(int argc, char** argv) {
 
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.0, 0.0, 0.0, 1.0);
-//    glPointSize(2);
+    glPointSize(2);
 
     glutMainLoop();
 }
